@@ -1,0 +1,391 @@
+/* ============================================================
+   style.css  –  LinguaSwap Translation App
+   ============================================================ */
+
+/* ── CSS Variables (Dark theme default) ─────────────────── */
+:root {
+  --bg:      #0d0f14;
+  --surface: #13161e;
+  --card:    #1a1e2a;
+  --border:  #252a38;
+  --accent:  #4f8ef7;
+  --accent2: #7c5cfc;
+  --text:    #e8eaf0;
+  --muted:   #6b7280;
+  --success: #34d399;
+  --error:   #f87171;
+  --glow:    rgba(79, 142, 247, 0.15);
+}
+
+/* ── Light Mode Override ─────────────────────────────────── */
+body.light {
+  --bg:      #f0f2f8;
+  --surface: #ffffff;
+  --card:    #ffffff;
+  --border:  #dde1ef;
+  --text:    #1a1e2a;
+  --muted:   #8b92a9;
+  --glow:    rgba(79, 142, 247, 0.12);
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(79, 142, 247, 0.05) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(124, 92, 252, 0.05) 0%, transparent 55%);
+}
+body.light .card {
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Reset ───────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Base Body ───────────────────────────────────────────── */
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2rem 1rem 4rem;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(79, 142, 247, 0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(124, 92, 252, 0.07) 0%, transparent 55%);
+}
+
+/* ── Top Bar ─────────────────────────────────────────────── */
+.top-bar {
+  width: 100%;
+  max-width: 860px;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  animation: fadeDown 0.5s ease both;
+}
+
+.dark-toggle {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  cursor: pointer;
+  font-family: 'Sora', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+.dark-toggle:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  animation: fadeDown 0.6s ease both;
+}
+header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, #4f8ef7 0%, #7c5cfc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+header p {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+  letter-spacing: 0.03em;
+}
+
+/* ── Card ────────────────────────────────────────────────── */
+.card {
+  width: 100%;
+  max-width: 860px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1.8rem;
+  box-shadow:
+    0 0 60px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+  animation: fadeUp 0.7s ease both 0.1s;
+}
+
+/* ── Language Bar ────────────────────────────────────────── */
+.lang-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.lang-select-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 130px;
+}
+.source-wrap { max-width: 160px; }
+.target-wrap { max-width: 160px; margin-left: auto; }
+
+.lang-select-wrap select {
+  width: 100%;
+  padding: 0.55rem 2rem 0.55rem 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: 'Sora', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  appearance: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.lang-select-wrap select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--glow);
+}
+/* Custom dropdown arrow */
+.lang-select-wrap::after {
+  content: '▾';
+  position: absolute;
+  right: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+  font-size: 0.7rem;
+}
+
+/* ── Switch Button ───────────────────────────────────────── */
+.switch-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: background 0.2s, transform 0.3s, box-shadow 0.2s;
+  flex-shrink: 0;
+}
+.switch-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 16px rgba(79, 142, 247, 0.4);
+}
+.switch-btn.spin {
+  animation: spin 0.4s ease;
+}
+
+/* ── Text Panels ─────────────────────────────────────────── */
+.panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 580px) {
+  .panels { grid-template-columns: 1fr; }
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s;
+}
+.panel:focus-within {
+  border-color: rgba(79, 142, 247, 0.4);
+}
+
+.panel-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+
+.panel textarea {
+  flex: 1;
+  min-height: 130px;
+  background: transparent;
+  border: none;
+  resize: none;
+  color: var(--text);
+  font-family: 'Sora', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  outline: none;
+}
+.panel textarea::placeholder {
+  color: var(--muted);
+}
+
+.output-text {
+  min-height: 130px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+.output-text.placeholder-text {
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ── Panel Footer (Listen / Copy / Count) ────────────────── */
+.panel-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.char-count {
+  margin-left: auto;
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+}
+.char-count.warn {
+  color: var(--error);
+}
+
+.icon-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: 'Sora', sans-serif;
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+.icon-btn:hover {
+  background: var(--border);
+  color: var(--text);
+}
+.icon-btn svg {
+  width: 14px;
+  height: 14px;
+}
+.icon-btn.copied {
+  color: var(--success);
+}
+
+/* ── Translate Button ────────────────────────────────────── */
+.translate-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.4rem;
+}
+
+.translate-btn {
+  padding: 0.78rem 3rem;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #4f8ef7 0%, #7c5cfc 100%);
+  color: #fff;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(79, 142, 247, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+.translate-btn:hover:not(:disabled) {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 28px rgba(79, 142, 247, 0.45);
+}
+.translate-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+.translate-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Spinner (inside Translate button) ───────────────────── */
+.loader {
+  display: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+.translate-btn.loading .loader {
+  display: inline-block;
+}
+
+/* ── Toast Notification ──────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.7rem 1.2rem;
+  font-size: 0.82rem;
+  color: var(--text);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+  z-index: 999;
+}
+.toast.show   { opacity: 1; transform: translateY(0); }
+.toast.error  { border-color: var(--error);   color: var(--error);   }
+.toast.success{ border-color: var(--success); color: var(--success); }
+
+/* ── Keyframe Animations ─────────────────────────────────── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-14px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
